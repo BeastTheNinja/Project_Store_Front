@@ -91,7 +91,7 @@ A modern, responsive storefront built as a school project using the DummyJSON AP
 2. Commit your changes with clear messages.
 3. Open a pull request and describe your changes.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) (if available) and the [Wiki](#wiki--documentation) for code style and architectural guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Wiki](#wiki--documentation) for code style and architectural guidelines.
 
 ## Wiki & Documentation
 
