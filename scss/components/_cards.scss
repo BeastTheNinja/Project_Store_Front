@@ -1,1 +1,325 @@
-// write card styles here
+// ========================================
+// PRODUCT CARDS
+// ========================================
+
+.storefront-container {
+  padding: $spacing-2xl 0;
+}
+
+.products-container {
+  margin: $spacing-2xl 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: $spacing-2xl;
+  padding: $spacing-xl 0;
+  
+  @media (min-width: $breakpoint-lg) {
+    grid-template-columns: repeat(3, 1fr); // Exactly 3 cards per row
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-xl;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+}
+
+.product-card {
+  background: $white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: all $transition-normal;
+  border: 1px solid $gray-200;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $shadow-xl;
+    border-color: $primary-color;
+  }
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: $gray-100;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow;
+  }
+  
+  &.loaded img {
+    animation: fadeIn $transition-normal ease-in;
+  }
+  
+  .product-card:hover & img {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.product-info {
+  padding: $spacing-xl;
+}
+
+.product-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $gray-900;
+  margin: 0 0 $spacing-md;
+  line-height: 1.4;
+  
+  // Truncate long titles
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-description {
+  font-size: $font-size-sm;
+  color: $gray-600;
+  margin: 0 0 $spacing-lg;
+  line-height: 1.5;
+  
+  // Truncate long descriptions
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-xl;
+}
+
+.product-price {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $primary-color;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $gray-600;
+  background: $gray-100;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $border-radius-lg;
+  
+  &::before {
+    content: '⭐';
+    color: $warning-color;
+  }
+}
+
+.product-actions {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.btn-view-details,
+.btn-add-to-cart {
+  flex: 1;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: center;
+  border: none;
+  
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn-view-details {
+  background: $gray-100;
+  color: $gray-700;
+  border: 2px solid $gray-300;
+  
+  &:hover {
+    background: $gray-200;
+    border-color: $gray-400;
+    color: $gray-800;
+  }
+}
+
+.btn-add-to-cart {
+  background: $primary-color;
+  color: $white;
+  border: 2px solid $primary-color;
+  
+  &:hover {
+    background: $primary-dark;
+    border-color: $primary-dark;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// ========================================
+// CATEGORY SECTIONS
+// ========================================
+
+.categories-section {
+  margin: $spacing-2xl 0;
+  
+  h3 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $gray-900;
+    margin-bottom: $spacing-xl;
+    text-align: center;
+  }
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  justify-content: center;
+  margin-bottom: $spacing-2xl;
+}
+
+.category-btn {
+  padding: $spacing-md $spacing-xl;
+  background: $white;
+  border: 2px solid $gray-300;
+  border-radius: $border-radius-lg;
+  color: $gray-700;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-transform: capitalize;
+  
+  &:hover {
+    border-color: $primary-color;
+    color: $primary-color;
+    transform: translateY(-2px);
+    box-shadow: $shadow-sm;
+  }
+  
+  &.active {
+    background: $primary-color;
+    border-color: $primary-color;
+    color: $white;
+    
+    &:hover {
+      background: $primary-dark;
+      border-color: $primary-dark;
+    }
+  }
+}
+
+// ========================================
+// SEARCH SECTION
+// ========================================
+
+.search-section {
+  margin: $spacing-2xl 0;
+  
+  .search-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    background: $white;
+    border: 2px solid $gray-300;
+    border-radius: $border-radius-xl;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    transition: all $transition-fast;
+    
+    &:focus-within {
+      border-color: $primary-color;
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: $spacing-lg $spacing-xl;
+    border: none;
+    font-size: $font-size-base;
+    color: $gray-800;
+    outline: none;
+    
+    &::placeholder {
+      color: $gray-500;
+    }
+  }
+  
+  .search-button {
+    padding: $spacing-lg $spacing-2xl;
+    background: $primary-color;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    transition: all $transition-fast;
+    
+    &:hover {
+      background: $primary-dark;
+    }
+  }
+}
+
+// ========================================
+// EMPTY STATE
+// ========================================
+
+.empty-state {
+  text-align: center;
+  padding: $spacing-4xl;
+  color: $gray-500;
+  
+  .empty-icon {
+    font-size: 4rem;
+    margin-bottom: $spacing-xl;
+    opacity: 0.5;
+  }
+  
+  .empty-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-md;
+    color: $gray-700;
+  }
+  
+  .empty-description {
+    font-size: $font-size-base;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
