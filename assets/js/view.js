@@ -33,6 +33,10 @@ import {
   loadAndDisplayProducts 
 } from './components/DataLoader.js';
 
+import { 
+  createFooter 
+} from './components/FooterComponent.js';
+
 // ========================================
 // MAIN STOREFRONT CREATION
 // ========================================
@@ -64,6 +68,9 @@ const createStorefrontElements = () => {
   mainContainer.appendChild(categoriesSection);
   mainContainer.appendChild(errorMessage);
   mainContainer.appendChild(productsContainer);
+
+  // Create footer at the end
+  createFooter();
 
   console.log('✅ Storefront elements created dynamically');
 };

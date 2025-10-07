@@ -5,3 +5,4 @@ export * from './UIStateManager.js';
 export * from './ProductComponent.js';
 export * from './CategoryComponent.js';
 export * from './DataLoader.js';
+export * from './FooterComponent.js';

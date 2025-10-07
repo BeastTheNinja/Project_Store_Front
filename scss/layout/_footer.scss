@@ -1,1 +1,383 @@
-// write footer styles here
+// ========================================
+// FOOTER COMPONENT STYLES
+// ========================================
+
+.storefront-footer {
+  background: linear-gradient(135deg, $gray-900 0%, $gray-800 100%);
+  color: $gray-300;
+  margin-top: auto;
+  padding: $spacing-4xl 0 $spacing-lg;
+  
+  // Container
+  .container {
+    @include container;
+  }
+
+  // ========================================
+  // MAIN FOOTER CONTENT
+  // ========================================
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-3xl;
+    margin-bottom: $spacing-3xl;
+    
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-2xl;
+    }
+    
+    @include desktop-up {
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-xl;
+    }
+  }
+
+  // ========================================
+  // FOOTER SECTIONS
+  // ========================================
+  
+  .footer-section {
+    // Company info section (first column)
+    &:first-child {
+      @include desktop-up {
+        grid-column: span 1;
+      }
+    }
+  }
+
+  .footer-title {
+    @include heading-lg;
+    color: $white;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-xl;
+    
+    @include desktop-up {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  .footer-subtitle {
+    @include heading-md;
+    color: $gray-100;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+  }
+
+  .footer-description {
+    @include body-text;
+    color: $gray-400;
+    margin-bottom: $spacing-xl;
+    line-height: 1.7;
+  }
+
+  // ========================================
+  // SOCIAL MEDIA LINKS
+  // ========================================
+  
+  .footer-social {
+    display: flex;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba($white, 0.1);
+    border-radius: $border-radius-lg;
+    font-size: $font-size-lg;
+    text-decoration: none;
+    transition: all $transition-normal;
+    backdrop-filter: blur(10px);
+    
+    &:hover {
+      background: $primary-color;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba($primary-color, 0.3);
+    }
+    
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.4);
+    }
+  }
+
+  // ========================================
+  // FOOTER LINKS
+  // ========================================
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-link {
+    @include link-hover;
+    display: inline-block;
+    padding: $spacing-xs 0;
+    color: $gray-400;
+    font-size: $font-size-sm;
+    line-height: 1.6;
+    
+    &:hover {
+      color: $primary-light;
+      padding-left: $spacing-xs;
+    }
+  }
+
+  // ========================================
+  // CONTACT INFORMATION
+  // ========================================
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: rgba($white, 0.05);
+    border-radius: $border-radius-md;
+    border-left: 3px solid $primary-color;
+    transition: all $transition-normal;
+    cursor: pointer;
+    
+    &:hover {
+      background: rgba($white, 0.08);
+      transform: translateX(5px);
+    }
+  }
+
+  .contact-icon {
+    font-size: $font-size-lg;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .contact-details {
+    flex: 1;
+    
+    p {
+      margin: 0;
+      color: $gray-400;
+      font-size: $font-size-sm;
+      line-height: 1.5;
+      
+      &:first-child {
+        color: $gray-200;
+        font-weight: $font-weight-medium;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  // ========================================
+  // NEWSLETTER SECTION (Optional)
+  // ========================================
+  
+  .newsletter-section {
+    .newsletter-text {
+      @include small-text;
+      color: $gray-400;
+      margin-bottom: $spacing-lg;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+      
+      @include mobile-up {
+        flex-direction: row;
+      }
+    }
+    
+    .newsletter-input {
+      flex: 1;
+      padding: $spacing-md;
+      border: 1px solid rgba($white, 0.2);
+      border-radius: $border-radius-md;
+      background: rgba($white, 0.1);
+      color: $white;
+      font-size: $font-size-sm;
+      
+      &::placeholder {
+        color: $gray-500;
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+      }
+    }
+    
+    .newsletter-button {
+      @include button-base;
+      background: $primary-color;
+      color: $white;
+      font-weight: $font-weight-semibold;
+      
+      @include mobile-up {
+        white-space: nowrap;
+      }
+      
+      &:hover {
+        background: $primary-dark;
+        transform: translateY(-1px);
+      }
+    }
+    
+    .newsletter-message {
+      padding: $spacing-sm $spacing-md;
+      border-radius: $border-radius-sm;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-medium;
+      
+      &.newsletter-success {
+        background: rgba($success-color, 0.2);
+        color: $success-color;
+        border: 1px solid rgba($success-color, 0.3);
+      }
+      
+      &.newsletter-error {
+        background: rgba($error-color, 0.2);
+        color: $error-color;
+        border: 1px solid rgba($error-color, 0.3);
+      }
+    }
+  }
+
+  // ========================================
+  // FOOTER BOTTOM
+  // ========================================
+  
+  .footer-bottom {
+    border-top: 1px solid rgba($white, 0.1);
+    padding-top: $spacing-xl;
+  }
+
+  .footer-bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-lg;
+    text-align: center;
+    
+    @include tablet-up {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  .copyright {
+    @include small-text;
+    color: $gray-500;
+    margin: 0;
+  }
+
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    @include tablet-up {
+      justify-content: flex-end;
+    }
+  }
+
+  .legal-link {
+    @include small-text;
+    color: $gray-500;
+    text-decoration: none;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: $primary-light;
+    }
+  }
+
+  .separator {
+    color: $gray-600;
+    font-size: $font-size-xs;
+  }
+
+  // ========================================
+  // RESPONSIVE ADJUSTMENTS
+  // ========================================
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-3xl 0 $spacing-lg;
+    
+    .footer-content {
+      gap: $spacing-2xl;
+      margin-bottom: $spacing-2xl;
+    }
+    
+    .footer-title {
+      font-size: $font-size-lg;
+    }
+    
+    .contact-item {
+      padding: $spacing-sm;
+    }
+    
+    .social-link {
+      width: 36px;
+      height: 36px;
+      font-size: $font-size-base;
+    }
+  }
+
+  // ========================================
+  // DARK MODE OVERRIDES (If needed)
+  // ========================================
+  
+  @media (prefers-color-scheme: light) {
+    // Add light mode overrides if your site supports theme switching
+  }
+}
+
+// ========================================
+// FOOTER ANIMATIONS
+// ========================================
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Add entrance animation
+.storefront-footer {
+  animation: fadeInUp 0.6s ease-out;
+  
+  .footer-section {
+    animation: fadeInUp 0.8s ease-out backwards;
+    
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}

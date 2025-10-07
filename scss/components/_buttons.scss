@@ -1,1 +1,227 @@
-// Button styles
+// ========================================
+// BUTTON COMPONENT STYLES
+// ========================================
+
+// Base button styles
+.btn {
+  @include button-base;
+  
+  // Primary button
+  &.btn-primary {
+    background: $primary-color;
+    color: $white;
+    
+    &:hover {
+      background: $primary-dark;
+      transform: translateY(-1px);
+      box-shadow: $shadow-md;
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  // Secondary button
+  &.btn-secondary {
+    background: $gray-200;
+    color: $gray-800;
+    
+    &:hover {
+      background: $gray-300;
+      transform: translateY(-1px);
+    }
+  }
+  
+  // Success button
+  &.btn-success {
+    background: $success-color;
+    color: $white;
+    
+    &:hover {
+      background: darken($success-color, 10%);
+      transform: translateY(-1px);
+    }
+  }
+  
+  // Outline button
+  &.btn-outline {
+    background: transparent;
+    color: $primary-color;
+    border: 2px solid $primary-color;
+    
+    &:hover {
+      background: $primary-color;
+      color: $white;
+    }
+  }
+  
+  // Small button
+  &.btn-sm {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-xs;
+  }
+  
+  // Large button
+  &.btn-lg {
+    padding: $spacing-lg $spacing-2xl;
+    font-size: $font-size-lg;
+  }
+  
+  // Disabled state
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+// ========================================
+// PRODUCT CARD BUTTONS
+// ========================================
+
+.btn-view-details {
+  @include button-base;
+  background: transparent;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-sm;
+  
+  &:hover {
+    background: $primary-color;
+    color: $white;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-add-to-cart {
+  @include button-base;
+  background: $secondary-color;
+  color: $white;
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-sm;
+  
+  &:hover {
+    background: darken($secondary-color, 10%);
+    transform: translateY(-1px);
+  }
+}
+
+// ========================================
+// CATEGORY BUTTONS
+// ========================================
+
+.category-btn {
+  @include button-base;
+  background: $gray-100;
+  color: $gray-700;
+  border: 1px solid $gray-300;
+  padding: $spacing-md $spacing-xl;
+  
+  &:hover {
+    background: $gray-200;
+    border-color: $gray-400;
+  }
+  
+  &.active {
+    background: $primary-color;
+    color: $white;
+    border-color: $primary-color;
+    
+    &:hover {
+      background: $primary-dark;
+    }
+  }
+}
+
+// ========================================
+// CART BUTTON
+// ========================================
+
+.cart-button {
+  @include button-base;
+  background: transparent;
+  color: $gray-600;
+  padding: $spacing-sm;
+  border-radius: $border-radius-lg;
+  position: relative;
+  
+  &:hover {
+    background: $gray-100;
+    color: $primary-color;
+  }
+  
+  .cart-icon {
+    font-size: $font-size-xl;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: $error-color;
+    color: $white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+// ========================================
+// SEARCH BUTTON
+// ========================================
+
+.search-button,
+.newsletter-button {
+  @include button-base;
+  background: $primary-color;
+  color: $white;
+  
+  &:hover {
+    background: $primary-dark;
+    transform: translateY(-1px);
+  }
+}
+
+// ========================================
+// DROPDOWN TRIGGER
+// ========================================
+
+.dropdown-trigger {
+  @include button-base;
+  background: transparent;
+  color: $gray-700;
+  padding: $spacing-sm $spacing-lg;
+  
+  &:hover {
+    background: $gray-100;
+  }
+  
+  &.open {
+    background: $gray-100;
+    color: $primary-color;
+  }
+  
+  .dropdown-icon {
+    margin-left: $spacing-sm;
+    transition: transform $transition-fast;
+  }
+  
+  &.open .dropdown-icon {
+    transform: rotate(180deg);
+  }
+}
