@@ -1,1 +1,270 @@
-// write navigation styles here
+// ========================================
+// NAVIGATION STYLES
+// ========================================
+
+.storefront-nav {
+  background: $white;
+  box-shadow: $shadow-md;
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  border-bottom: 1px solid $gray-200;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $nav-height;
+  gap: $spacing-xl;
+  
+  @media (max-width: $breakpoint-md) {
+    height: $nav-height-mobile;
+    gap: $spacing-lg;
+  }
+}
+
+// Brand/Logo
+.nav-brand {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $primary-color;
+  text-decoration: none;
+  flex-shrink: 0;
+  
+  &:hover {
+    color: $primary-dark;
+  }
+}
+
+// Navigation menu
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xl;
+  flex: 1;
+  
+  @media (max-width: $breakpoint-lg) {
+    gap: $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    display: none; // Hide on mobile (you can add mobile menu later)
+  }
+}
+
+// Category dropdown
+.nav-dropdown {
+  position: relative;
+  
+  .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-lg;
+    background: none;
+    border: none;
+    color: $gray-700;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    border-radius: $border-radius-md;
+    transition: all $transition-fast;
+    
+    &:hover {
+      background: $gray-100;
+      color: $primary-color;
+    }
+    
+    &.active {
+      background: $primary-color;
+      color: $white;
+    }
+    
+    .dropdown-icon {
+      transition: transform $transition-fast;
+    }
+    
+    &.open .dropdown-icon {
+      transform: rotate(180deg);
+    }
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+    min-width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all $transition-fast;
+    z-index: $z-dropdown;
+    
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+  
+  .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: $spacing-md $spacing-lg;
+    background: none;
+    border: none;
+    text-align: left;
+    color: $gray-700;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+    border-bottom: 1px solid $gray-100;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &:hover {
+      background: $gray-50;
+      color: $primary-color;
+    }
+    
+    &:first-child {
+      border-top-left-radius: $border-radius-lg;
+      border-top-right-radius: $border-radius-lg;
+    }
+    
+    &:last-child {
+      border-bottom-left-radius: $border-radius-lg;
+      border-bottom-right-radius: $border-radius-lg;
+    }
+  }
+}
+
+// Search section
+.nav-search {
+  flex: 1;
+  max-width: 400px;
+  position: relative;
+  
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    background: $gray-100;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all $transition-fast;
+    
+    &:focus-within {
+      border-color: $primary-color;
+      background: $white;
+      box-shadow: $shadow-sm;
+    }
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: $spacing-md $spacing-lg;
+    border: none;
+    background: transparent;
+    font-size: $font-size-base;
+    color: $gray-800;
+    outline: none;
+    
+    &::placeholder {
+      color: $gray-500;
+    }
+  }
+  
+  .search-button {
+    padding: $spacing-md $spacing-lg;
+    background: $primary-color;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    transition: all $transition-fast;
+    
+    &:hover {
+      background: $primary-dark;
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+// Cart section
+.nav-cart {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+  flex-shrink: 0;
+}
+
+.cart-button {
+  position: relative;
+  padding: $spacing-md;
+  background: none;
+  border: 2px solid $gray-300;
+  border-radius: $border-radius-lg;
+  color: $gray-700;
+  cursor: pointer;
+  transition: all $transition-fast;
+  
+  &:hover {
+    border-color: $primary-color;
+    color: $primary-color;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+  
+  .cart-icon {
+    font-size: $font-size-xl;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: $error-color;
+    color: $white;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+// Mobile responsive
+@media (max-width: $breakpoint-md) {
+  .nav-search {
+    max-width: 200px;
+  }
+  
+  .nav-search .search-input {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+  
+  .nav-search .search-button {
+    padding: $spacing-sm $spacing-md;
+  }
+}
