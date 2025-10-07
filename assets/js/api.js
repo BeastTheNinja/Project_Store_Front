@@ -15,6 +15,10 @@ export const getProducts = async () => {
   try {
     const response = await fetch(API_BASE_URL);
     const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     return data; // Return full object with products, total, skip, limit
 
   } catch (error) {
@@ -28,6 +32,10 @@ export const getProductsByCategory = async (category) => {
   try {
     const response = await fetch(`${API_BY_CATEGORY}${category}`);
     const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     return data; // Return full object with products, total, skip, limit
 
   } catch (error) {
@@ -41,6 +49,10 @@ export const searchProducts = async (query) => {
   try {
     const response = await fetch(`${API_BY_SEARCH}${query}`);
     const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     return data; // Return full object with products, total, skip, limit
 
   } catch (error) {
@@ -54,6 +66,10 @@ export const getProductById = async (id) => {
   try {
     const response = await fetch(`${API_BY_ID}${id}`);
     const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     return data;
 
   } catch (error) {
