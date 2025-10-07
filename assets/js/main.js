@@ -2,25 +2,8 @@
 
 // import modules here
 import {
-    // Initialization
-    initializeStorefront,
-    setupEventListeners,
-    
-    // UI State Management  
-    showLoadingSpinner,
-    hideLoadingSpinner,
-    showError,
-    hideError,
-    
-    // Rendering Functions
-    renderProducts,
-    setActiveCategory,
-    
-    // Data Loading Functions
-    loadAndDisplayProducts,
-    loadAndDisplayProductsByCategory,
-    searchAndDisplayProducts,
-    loadAndDisplayProductById
+    // Main initialization function
+    initializeStorefront
 } from './view.js';
 
 // import utils here
@@ -30,11 +13,8 @@ import {
 
 // Main function to initialize and load the storefront
 const initializeApp = () => {
-    // Create the UI structure
+    // Create the UI structure and load initial products
     initializeStorefront();
-    
-    // Load initial products
-    loadAndDisplayProducts();
     
     // Setup custom event listeners for UI interactions
     setupAppEventListeners();
@@ -42,18 +22,16 @@ const initializeApp = () => {
     console.log('App initialized successfully');
 };
 
-// Setup event listeners for custom events from view.js
+// Setup event listeners for custom events from components
 const setupAppEventListeners = () => {
-    // Handle search events
-    window.addEventListener('searchProducts', (event) => {
-        const { query } = event.detail;
-        searchAndDisplayProducts(query);
-    });
+    // Handle search events - no longer needed as DataLoader handles this automatically
+    // The navigation component already dispatches 'navSearchProducts' and DataLoader listens for it
     
     // Handle view product details events  
     window.addEventListener('viewProductDetails', (event) => {
         const { productId } = event.detail;
-        loadAndDisplayProductById(productId);
+        // Dispatch event for DataLoader to handle
+        window.dispatchEvent(new CustomEvent('loadProductById', { detail: { productId } }));
     });
     
     // Handle add to cart events
@@ -63,18 +41,8 @@ const setupAppEventListeners = () => {
         // You can implement cart functionality here later
     });
     
-    // Handle category selection
-    document.addEventListener('click', (event) => {
-        if (event.target.classList.contains('category-btn')) {
-            const category = event.target.getAttribute('data-category');
-            if (category) {
-                loadAndDisplayProductsByCategory(category);
-            } else {
-                // "All Products" button clicked
-                loadAndDisplayProducts();
-            }
-        }
-    });
+    // Category selection is now handled automatically by CategoryComponent
+    // through the 'loadCategoryProducts' and 'loadAllProducts' events
 };
 
 // Initialize the app when DOM is loaded
