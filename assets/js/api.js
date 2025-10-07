@@ -14,11 +14,12 @@ const API_BY_ID = `${API_BASE_URL}/`; // append id to the end
 export const getProducts = async () => {
   try {
     const response = await fetch(API_BASE_URL);
-    const data = await response.json();
-    if (!response.ok) {
+     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
+    const data = await response.json();
+   
     return data; // Return full object with products, total, skip, limit
 
   } catch (error) {
@@ -31,10 +32,11 @@ export const getProducts = async () => {
 export const getProductsByCategory = async (category) => {
   try {
     const response = await fetch(`${API_BY_CATEGORY}${category}`);
-    const data = await response.json();
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+    
+    const data = await response.json();
 
     return data; // Return full object with products, total, skip, limit
 
@@ -48,10 +50,11 @@ export const getProductsByCategory = async (category) => {
 export const searchProducts = async (query) => {
   try {
     const response = await fetch(`${API_BY_SEARCH}${query}`);
-    const data = await response.json();
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
 
     return data; // Return full object with products, total, skip, limit
 
@@ -65,10 +68,11 @@ export const searchProducts = async (query) => {
 export const getProductById = async (id) => {
   try {
     const response = await fetch(`${API_BY_ID}${id}`);
-    const data = await response.json();
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
 
     return data;
 
