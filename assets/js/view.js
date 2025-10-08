@@ -1,165 +1,196 @@
-// view.js - Main orchestrator for the storefront application
-// This file coordinates all components and handles initialization
+// ========================================
+// VIEW.JS - USER INTERFACE COORDINATOR
+// This file brings together all the different parts of our website
+// Think of it as the "conductor" of an orchestra - coordinating all components
+// ========================================
 
-// Import all components
+// Import navigation functions (header, search, menus)
 import { 
-  createNavigation, 
-  setupNavigationEvents, 
-  populateNavigationDropdown 
+  createNavigation,           // Creates the top navigation bar
+  setupNavigationEvents,      // Handles clicks on navigation items
+  populateNavigationDropdown  // Fills category dropdown with data
 } from './components/NavigationComponent.js';
 
+// Import UI state management (loading spinners, error messages)
 import { 
-  createUIStateElements, 
-  showLoadingSpinner, 
-  hideLoadingSpinner, 
-  showError, 
-  hideError, 
-  updateDisplayInfo 
+  createUIStateElements,  // Creates loading and error message elements
+  showLoadingSpinner,     // Shows spinner when loading data
+  hideLoadingSpinner,     // Hides spinner when done loading
+  showError,             // Shows error messages to user
+  hideError,             // Hides error messages
+  updateDisplayInfo      // Updates "showing X of Y products" text
 } from './components/UIStateManager.js';
 
+// Import product display functions (product grid, cards)
 import { 
-  renderProducts, 
-  createProductsContainer, 
-  setupProductEventListeners 
+  renderProducts,             // Displays products in a grid
+  createProductsContainer,    // Creates the container for product grid
+  setupProductEventListeners  // Handles clicks on product cards
 } from './components/ProductComponent.js';
 
+// Import category functions (category buttons, filtering)
 import { 
-  createCategoriesSection, 
-  renderCategories 
+  createCategoriesSection,  // Creates category filter buttons
+  renderCategories         // Loads and displays all categories
 } from './components/CategoryComponent.js';
 
+// Import data loading functions (API calls, product fetching)
 import { 
-  setupDataLoaderEvents, 
-  loadAndDisplayProducts 
+  setupDataLoaderEvents,   // Sets up listeners for data loading events
+  loadAndDisplayProducts   // Fetches products from API and displays them
 } from './components/DataLoader.js';
 
+// Import footer creation function
 import { 
-  createFooter 
+  createFooter  // Creates the website footer
 } from './components/FooterComponent.js';
 
-// Import new purchase flow components
+// Import advanced shopping features (detailed views, cart, checkout)
+// These are more complex components for the full shopping experience
 import { 
-  createProductDetailView,
-  showProductDetail,
-  hideProductDetail,
-  setupProductDetailGlobalEvents
+  createProductDetailView,        // Creates modal for detailed product view
+  showProductDetail,             // Shows product detail modal
+  hideProductDetail,             // Hides product detail modal
+  setupProductDetailGlobalEvents // Sets up event listeners for product details
 } from './components/ProductDetailComponent.js';
+
 import { 
-  createCartView,
-  showCartView,
-  hideCartView,
-  updateCartView,
-  setupCartViewGlobalEvents
+  createCartView,             // Creates shopping cart modal
+  showCartView,              // Shows cart modal with items
+  hideCartView,              // Hides cart modal
+  updateCartView,            // Updates cart display when items change
+  setupCartViewGlobalEvents  // Sets up event listeners for cart
 } from './components/CartViewComponent.js';
 import { 
-  createCheckoutView,
-  showCheckout,
-  hideCheckout,
-  setupCheckoutGlobalEvents
+  createCheckoutView,        // Creates checkout process modal
+  showCheckout,             // Shows checkout modal for payment
+  hideCheckout,             // Hides checkout modal
+  setupCheckoutGlobalEvents // Sets up event listeners for checkout
 } from './components/CheckoutComponent.js';
+
 import { 
-  createThankYouView,
-  showThankYou,
-  hideThankYou,
-  setupThankYouGlobalEvents
+  createThankYouView,        // Creates order confirmation page
+  showThankYou,             // Shows thank you page after purchase
+  hideThankYou,             // Hides thank you page
+  setupThankYouGlobalEvents // Sets up event listeners for thank you page
 } from './components/ThankYouComponent.js';
 
 // ========================================
-// COMPONENT INSTANCES
+// COMPONENT STORAGE
+// These variables hold references to our UI components
 // ========================================
 
-// Initialize component instances
-let productDetailElement;
-let cartViewElement;
-let checkoutElement;
-let thankYouElement;
+// Store references to our modal/overlay components
+// This lets us show/hide them later
+let productDetailElement; // Holds the product detail modal
+let cartViewElement;      // Holds the shopping cart modal
+let checkoutElement;      // Holds the checkout process modal
+let thankYouElement;      // Holds the order confirmation page
 
 // ========================================
-// MAIN STOREFRONT CREATION
+// BUILDING THE WEBSITE STRUCTURE
+// This function creates all the main parts of our website layout
 // ========================================
 
-// Create and inject the main storefront structure
+// Main function that builds the entire website structure
 const createStorefrontElements = () => {
-  // Create navigation first
+  // Step 1: Create the top navigation bar (header with logo, search, cart)
   createNavigation();
   
-  // Find or create main container
+  // Step 2: Find or create the main content container
+  // This is where products, categories, etc. will be displayed
   let mainContainer = document.getElementById('storefront-container');
   if (!mainContainer) {
+    // If container doesn't exist, create it
     mainContainer = document.createElement('div');
     mainContainer.id = 'storefront-container';
     mainContainer.classList.add('storefront-container', 'container');
-    document.body.appendChild(mainContainer);
+    document.body.appendChild(mainContainer); // Add it to the page
   }
 
-  // Create UI state elements (loading spinner, error messages)
+  // Step 3: Create elements for loading states and error messages
+  // These show when we're fetching data or when something goes wrong
   const { loadingSpinner, errorMessage } = createUIStateElements();
 
-  // Create products container
+  // Step 4: Create the container where products will be displayed
+  // This is the grid that shows all the product cards
   const productsContainer = createProductsContainer();
 
-  // Create categories section
+  // Step 5: Create the category filter section
+  // This shows buttons like "All", "Electronics", "Clothing", etc.
   const categoriesSection = createCategoriesSection();
 
-  // Append all elements to main container
-  mainContainer.appendChild(categoriesSection);
-  mainContainer.appendChild(errorMessage);
-  mainContainer.appendChild(productsContainer);
+  // Step 6: Add all the sections to our main container in the right order
+  // Order matters - categories first, then error messages, then products
+  mainContainer.appendChild(categoriesSection);  // Category filter buttons
+  mainContainer.appendChild(errorMessage);       // Error message area
+  mainContainer.appendChild(productsContainer);  // Product grid
 
-  // Create footer at the end
+  // Step 7: Create the footer at the bottom of the page
   createFooter();
 
-  // Initialize new purchase flow components
+  // Step 8: Initialize advanced shopping features (cart, checkout, etc.)
+  // These are more complex components that handle the shopping experience
   initializePurchaseFlowComponents();
 
-  console.log('✅ Storefront elements created dynamically');
+  // Let developers know this step completed successfully
+  console.log('✅ Website structure created successfully');
 };
 
 // ========================================
-// PURCHASE FLOW COMPONENTS INITIALIZATION
+// ADVANCED SHOPPING FEATURES SETUP
+// This sets up the complex shopping components (cart, checkout, etc.)
 // ========================================
 
-// Initialize all purchase flow components
+// Function that sets up all the advanced shopping features
 const initializePurchaseFlowComponents = () => {
-  // Initialize product detail component (function-based)
+  // Create the product detail modal (shows when clicking on a product)
+  // This modal displays full product info, images, description, "Buy Now" button
   productDetailElement = createProductDetailView();
-  document.body.appendChild(productDetailElement);
-  setupProductDetailGlobalEvents();
+  document.body.appendChild(productDetailElement);   // Add it to the page (hidden by default)
+  setupProductDetailGlobalEvents();                  // Set up click handlers
   
-  // Initialize cart view component (function-based)
+  // Create the shopping cart modal (shows when clicking cart icon)
+  // This modal displays all items in cart, quantities, total price, checkout button
   cartViewElement = createCartView();
-  document.body.appendChild(cartViewElement);
-  setupCartViewGlobalEvents();
+  document.body.appendChild(cartViewElement);        // Add it to the page (hidden by default)
+  setupCartViewGlobalEvents();                       // Set up click handlers
   
-  // Initialize checkout component (function-based)
+  // Create the checkout modal (shows when clicking "Checkout" in cart)
+  // This modal handles payment info, shipping address, order confirmation
   checkoutElement = createCheckoutView();
-  document.body.appendChild(checkoutElement);
-  setupCheckoutGlobalEvents();
+  document.body.appendChild(checkoutElement);        // Add it to the page (hidden by default)
+  setupCheckoutGlobalEvents();                       // Set up click handlers
   
-  // Initialize thank you component (function-based)
+  // Create the thank you page (shows after successful purchase)
+  // This page displays order confirmation, order number, "Continue Shopping" button
   thankYouElement = createThankYouView();
-  document.body.appendChild(thankYouElement);
-  setupThankYouGlobalEvents();
+  document.body.appendChild(thankYouElement);        // Add it to the page (hidden by default)
+  setupThankYouGlobalEvents();                       // Set up click handlers
   
-  console.log('✅ Purchase flow components initialized');
+  // Let developers know all shopping features are ready
+  console.log('✅ Advanced shopping features initialized successfully');
 };
 
 // ========================================
-// EVENT COORDINATION AND SETUP
+// EVENT HANDLING SETUP
+// This sets up all the "listeners" that respond to user actions
+// Think of events like messages sent between different parts of the app
 // ========================================
 
-// Setup all event listeners and coordinate components
+// Main function that sets up all event listeners for the entire application
 const setupEventListeners = () => {
-  // Setup component-specific event listeners
-  setupProductEventListeners();
-  setupDataLoaderEvents();
-  setupNavigationEvents();
+  // Set up basic component event listeners
+  setupProductEventListeners();  // Handles clicks on product cards
+  setupDataLoaderEvents();       // Handles loading data from API
+  setupNavigationEvents();       // Handles navigation menu clicks
 
-  // Coordinate UI state events
-  window.addEventListener('showLoading', () => showLoadingSpinner());
-  window.addEventListener('hideLoading', () => hideLoadingSpinner());
-  window.addEventListener('showError', (e) => showError(e.detail.message));
-  window.addEventListener('hideError', () => hideError());
+  // Set up UI state event listeners (loading/error states)
+  // These respond to events sent when we need to show/hide loading or errors
+  window.addEventListener('showLoading', () => showLoadingSpinner());     // Show spinner
+  window.addEventListener('hideLoading', () => hideLoadingSpinner());     // Hide spinner
+  window.addEventListener('showError', (e) => showError(e.detail.message)); // Show error
+  window.addEventListener('hideError', () => hideError());                // Hide error
   
   // Coordinate product rendering
   window.addEventListener('renderProducts', (e) => {
@@ -217,32 +248,43 @@ const setupEventListeners = () => {
 };
 
 // ========================================
-// INITIALIZATION FUNCTION
+// MAIN STARTUP FUNCTION
+// This is the "main" function that starts everything
 // ========================================
 
-// Initialize the entire storefront UI
+// Main function that initializes the entire website
+// This is called from main.js to start the application
 const initializeStorefront = () => {
+  // Step 1: Build the website structure (header, navigation, product grid, footer)
   createStorefrontElements();
   
-  // Render categories and pass the navigation populator function
+  // Step 2: Load categories from API and populate the filter buttons
+  // .then() runs after the categories are loaded successfully
   renderCategories(populateNavigationDropdown).then(() => {
-    console.log('✅ Categories loaded');
+    console.log('✅ Product categories loaded from API');
   });
   
+  // Step 3: Set up all event listeners for user interactions
   setupEventListeners();
   
-  // Load initial products
+  // Step 4: Load and display the initial set of products
   loadAndDisplayProducts();
   
-  console.log('🚀 Storefront initialized with component-based architecture');
+  // Let developers know the entire application is ready
+  console.log('🚀 Website fully loaded and ready for users');
 };
 
-// Export only the main functions needed by other modules
+// ========================================
+// EXPORTS - Making functions available to other files
+// These functions can be imported and used by other JavaScript files
+// ========================================
+
 export { 
-  // Main initialization function
+  // Main function that starts the entire application
+  // This is imported by main.js to start everything
   initializeStorefront,
   
-  // Core setup functions
-  createStorefrontElements,
-  setupEventListeners
+  // Helper functions (mainly for testing or advanced use)
+  createStorefrontElements,  // Builds the website structure
+  setupEventListeners       // Sets up user interaction handlers
 };
