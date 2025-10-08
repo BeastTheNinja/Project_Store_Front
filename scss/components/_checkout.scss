@@ -1,0 +1,749 @@
+// ========================================
+// CHECKOUT COMPONENT STYLES
+// ========================================
+
+// Checkout Overlay
+.checkout-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($gray-900, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: $z-modal;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: $spacing-lg;
+  overflow-y: auto;
+  
+  &.hidden {
+    display: none;
+  }
+  
+  animation: fadeIn 0.3s ease-out;
+}
+
+// Checkout Modal
+.checkout-modal {
+  background: $white;
+  border-radius: $border-radius-xl;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 500px;
+  margin: $spacing-xl 0;
+  box-shadow: $shadow-xl;
+  animation: slideInUp 0.4s ease-out;
+  overflow: hidden;
+  
+  @include mobile-up {
+    margin: $spacing-2xl 0;
+  }
+}
+
+// ========================================
+// CHECKOUT HEADER
+// ========================================
+
+.checkout-header {
+  @include flex-between;
+  padding: $spacing-xl;
+  border-bottom: 1px solid $gray-200;
+  background: $gray-50;
+  
+  .checkout-title {
+    @include heading-lg;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    
+    .checkout-icon {
+      font-size: $font-size-2xl;
+      color: $primary-color;
+    }
+  }
+  
+  .checkout-close-btn {
+    @include button-base;
+    background: transparent;
+    color: $gray-600;
+    padding: $spacing-sm;
+    border-radius: $border-radius-lg;
+    
+    &:hover {
+      background: $gray-200;
+      color: $gray-800;
+    }
+    
+    span {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+
+// ========================================
+// CHECKOUT STEPS
+// ========================================
+
+.checkout-steps {
+  display: flex;
+  justify-content: center;
+  padding: $spacing-xl;
+  background: $white;
+  border-bottom: 1px solid $gray-200;
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg;
+  }
+  
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    flex: 1;
+    max-width: 150px;
+    position: relative;
+    
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: calc(100% + 10px);
+      width: calc(100% - 20px);
+      height: 2px;
+      background: $gray-300;
+      z-index: 1;
+    }
+    
+    &.active::after,
+    &.completed::after {
+      background: $primary-color;
+    }
+    
+    .step-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: $gray-300;
+      color: $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-sm;
+      position: relative;
+      z-index: 2;
+      transition: all $transition-fast;
+    }
+    
+    .step-title {
+      @include small-text;
+      font-weight: $font-weight-semibold;
+      color: $gray-600;
+      text-align: center;
+      transition: all $transition-fast;
+    }
+    
+    &.active {
+      .step-number {
+        background: $primary-color;
+        transform: scale(1.1);
+      }
+      
+      .step-title {
+        color: $primary-color;
+      }
+    }
+    
+    &.completed {
+      .step-number {
+        background: $success-color;
+      }
+      
+      .step-title {
+        color: $success-color;
+      }
+    }
+  }
+}
+
+// ========================================
+// CHECKOUT CONTENT
+// ========================================
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: $spacing-2xl;
+  padding: $spacing-xl;
+  min-height: 500px;
+  
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg;
+  }
+}
+
+// ========================================
+// CHECKOUT FORM
+// ========================================
+
+.checkout-form {
+  .form-section {
+    margin-bottom: $spacing-2xl;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section-title {
+      @include heading-md;
+      margin: 0 0 $spacing-lg 0;
+      color: $gray-900;
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      
+      .section-icon {
+        font-size: $font-size-lg;
+        color: $primary-color;
+      }
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-lg;
+      
+      @media (max-width: $breakpoint-sm) {
+        grid-template-columns: 1fr;
+      }
+      
+      &.full-width {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-group {
+      margin-bottom: $spacing-lg;
+      
+      label {
+        @include body-text;
+        display: block;
+        margin-bottom: $spacing-sm;
+        font-weight: $font-weight-semibold;
+        color: $gray-700;
+        
+        .required {
+          color: $error-color;
+          margin-left: $spacing-xs;
+        }
+      }
+      
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: $spacing-md;
+        border: 1px solid $gray-300;
+        border-radius: $border-radius-md;
+        font-size: $font-size-base;
+        transition: all $transition-fast;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+          box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+        }
+        
+        &.error {
+          border-color: $error-color;
+          
+          &:focus {
+            box-shadow: 0 0 0 3px rgba($error-color, 0.1);
+          }
+        }
+        
+        &:disabled {
+          background: $gray-100;
+          color: $gray-500;
+          cursor: not-allowed;
+        }
+      }
+      
+      .form-error {
+        @include small-text;
+        color: $error-color;
+        margin-top: $spacing-xs;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        
+        .error-icon {
+          font-size: $font-size-sm;
+        }
+      }
+      
+      .form-help {
+        @include small-text;
+        color: $gray-600;
+        margin-top: $spacing-xs;
+      }
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-lg;
+      
+      input[type="checkbox"] {
+        width: auto;
+        margin: 0;
+      }
+      
+      label {
+        margin: 0;
+        cursor: pointer;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// ========================================
+// PAYMENT METHODS
+// ========================================
+
+.payment-methods {
+  .payment-options {
+    display: grid;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-xl;
+  }
+  
+  .payment-option {
+    border: 2px solid $gray-200;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    cursor: pointer;
+    transition: all $transition-fast;
+    
+    &:hover {
+      border-color: $gray-300;
+      background: $gray-50;
+    }
+    
+    &.selected {
+      border-color: $primary-color;
+      background: rgba($primary-color, 0.05);
+    }
+    
+    .payment-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin-bottom: $spacing-sm;
+      
+      input[type="radio"] {
+        width: auto;
+        margin: 0;
+      }
+      
+      .payment-icon {
+        font-size: $font-size-xl;
+        color: $primary-color;
+      }
+      
+      .payment-name {
+        @include heading-sm;
+        margin: 0;
+        color: $gray-900;
+      }
+    }
+    
+    .payment-description {
+      @include body-text;
+      color: $gray-600;
+      margin: 0;
+      padding-left: 35px;
+    }
+    
+    .payment-details {
+      margin-top: $spacing-lg;
+      padding-left: 35px;
+      
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacing-md;
+        
+        @media (max-width: $breakpoint-sm) {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// ORDER SUMMARY
+// ========================================
+
+.order-summary {
+  background: $gray-50;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  border: 1px solid $gray-200;
+  height: fit-content;
+  
+  .summary-title {
+    @include heading-md;
+    margin: 0 0 $spacing-xl 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    
+    .summary-icon {
+      font-size: $font-size-lg;
+      color: $primary-color;
+    }
+  }
+  
+  .order-items {
+    margin-bottom: $spacing-xl;
+    
+    .order-item {
+      display: flex;
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .item-image {
+        width: 60px;
+        height: 60px;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: $border-radius-md;
+        }
+      }
+      
+      .item-details {
+        flex: 1;
+        
+        .item-name {
+          @include body-text;
+          margin: 0 0 $spacing-xs 0;
+          font-weight: $font-weight-semibold;
+          color: $gray-900;
+        }
+        
+        .item-quantity {
+          @include small-text;
+          color: $gray-600;
+        }
+      }
+      
+      .item-price {
+        @include body-text;
+        font-weight: $font-weight-bold;
+        color: $gray-900;
+      }
+    }
+  }
+  
+  .summary-calculations {
+    border-top: 1px solid $gray-200;
+    padding-top: $spacing-lg;
+    
+    .calc-line {
+      @include flex-between;
+      margin-bottom: $spacing-md;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      &.total {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $gray-900;
+        border-top: 1px solid $gray-300;
+        margin-top: $spacing-lg;
+        padding-top: $spacing-lg;
+      }
+      
+      &.discount {
+        color: $success-color;
+      }
+      
+      .calc-label {
+        @include body-text;
+        color: $gray-700;
+      }
+      
+      .calc-value {
+        @include body-text;
+        font-weight: $font-weight-semibold;
+        color: $gray-900;
+      }
+    }
+  }
+}
+
+// ========================================
+// CHECKOUT ACTIONS
+// ========================================
+
+.checkout-actions {
+  display: flex;
+  gap: $spacing-lg;
+  margin-top: $spacing-2xl;
+  padding-top: $spacing-xl;
+  border-top: 1px solid $gray-200;
+  
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+  }
+  
+  .btn-back {
+    @include button-base;
+    background: transparent;
+    color: $gray-700;
+    border: 1px solid $gray-300;
+    padding: $spacing-lg $spacing-xl;
+    flex: 1;
+    
+    &:hover {
+      background: $gray-100;
+      border-color: $gray-400;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  .btn-next,
+  .btn-place-order {
+    @include button-base;
+    background: $primary-color;
+    color: $white;
+    padding: $spacing-lg $spacing-xl;
+    font-weight: $font-weight-bold;
+    flex: 1;
+    
+    &:hover {
+      background: $primary-dark;
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+    
+    &:disabled {
+      background: $gray-400;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba($white, 0.3);
+      border-radius: 50%;
+      border-top-color: $white;
+      animation: spin 1s linear infinite;
+      margin-right: $spacing-sm;
+    }
+  }
+}
+
+// ========================================
+// REVIEW STEP
+// ========================================
+
+.review-section {
+  .review-item {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    
+    .review-header {
+      @include flex-between;
+      margin-bottom: $spacing-md;
+      
+      .review-title {
+        @include heading-sm;
+        margin: 0;
+        color: $gray-900;
+      }
+      
+      .btn-edit {
+        @include button-base;
+        background: transparent;
+        color: $primary-color;
+        padding: $spacing-xs $spacing-sm;
+        font-size: $font-size-sm;
+        
+        &:hover {
+          background: rgba($primary-color, 0.1);
+        }
+      }
+    }
+    
+    .review-content {
+      @include body-text;
+      color: $gray-700;
+      line-height: 1.5;
+      
+      p {
+        margin: 0 0 $spacing-sm 0;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// SECURITY INDICATORS
+// ========================================
+
+.security-notice {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+  background: rgba($success-color, 0.1);
+  border: 1px solid rgba($success-color, 0.2);
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-xl;
+  
+  .security-icon {
+    font-size: $font-size-lg;
+    color: $success-color;
+  }
+  
+  .security-text {
+    @include body-text;
+    color: $success-color;
+    font-weight: $font-weight-semibold;
+    margin: 0;
+  }
+}
+
+// ========================================
+// LOADING STATES
+// ========================================
+
+.checkout-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($white, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  
+  .loading-content {
+    text-align: center;
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid $gray-200;
+      border-top-color: $primary-color;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto $spacing-lg auto;
+    }
+    
+    .loading-text {
+      @include body-text;
+      color: $gray-700;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE ADJUSTMENTS
+// ========================================
+
+@media (max-width: $breakpoint-md) {
+  .checkout-modal {
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+  
+  .checkout-content {
+    padding: $spacing-lg;
+  }
+  
+  .checkout-steps {
+    .step {
+      max-width: 100px;
+      
+      .step-title {
+        font-size: $font-size-xs;
+      }
+    }
+  }
+}
+
+// ========================================
+// ANIMATIONS
+// ========================================
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

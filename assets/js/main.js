@@ -1,49 +1,88 @@
-// import components here
+// ========================================
+// MAIN.JS - APPLICATION ENTRY POINT
+// This is where our web application starts running
+// ========================================
 
-// import modules here
+// Import the main initialization function from view.js
+// This function sets up the entire user interface
 import {
-    // Main initialization function
     initializeStorefront
 } from './view.js';
 
-// import utils here
+// Import cart functionality for managing shopping cart
+// CartManager handles adding/removing items and storing cart data
+import { CartManager } from './cart.js';
 
+// ========================================
+// GLOBAL VARIABLES
+// These variables can be accessed throughout the application
+// ========================================
 
-// WRITE YOUR CODE HERE
+// Create a variable to hold our cart manager instance
+let cartManager;
 
-// Main function to initialize and load the storefront
+// ========================================
+// APPLICATION STARTUP
+// ========================================
+
+// Main function that starts our entire application
+// This runs when the page loads
 const initializeApp = () => {
-    // Create the UI structure and load initial products
+    // Step 1: Create the cart manager to handle shopping cart functionality
+    cartManager = new CartManager();
+    
+    // Step 2: Create the user interface and load products from API
     initializeStorefront();
     
-    // Setup custom event listeners for UI interactions
+    // Step 3: Set up event listeners to handle user interactions
     setupAppEventListeners();
     
+    // Let developers know the app started successfully
     console.log('App initialized successfully');
 };
 
-// Setup event listeners for custom events from components
+// Set up listeners for custom events that happen throughout the app
+// Events are a way for different parts of the app to communicate
 const setupAppEventListeners = () => {
-    // Handle search events - no longer needed as DataLoader handles this automatically
-    // The navigation component already dispatches 'navSearchProducts' and DataLoader listens for it
     
-    // Handle view product details events  
+    // Listen for when user wants to view product details
+    // This happens when they click on a product card
     window.addEventListener('viewProductDetails', (event) => {
-        const { productId } = event.detail;
-        // Dispatch event for DataLoader to handle
-        window.dispatchEvent(new CustomEvent('loadProductById', { detail: { productId } }));
+        const { productId } = event.detail; // Get the product ID from the event
+        console.log(`Viewing product details for ID: ${productId}`);
+        // The actual display is handled by ProductDetailComponent
     });
     
-    // Handle add to cart events
+    // Listen for when user wants to add something to cart
+    // This happens when they click "Add to Cart" buttons
     window.addEventListener('addToCart', (event) => {
-        const { productId } = event.detail;
-        console.log(`Add product ${productId} to cart`);
-        // You can implement cart functionality here later
+        const { productId, quantity = 1 } = event.detail; // Get product info from event
+        console.log(`Add product ${productId} to cart (quantity: ${quantity})`);
+        
+        // Use our cart manager to actually add the item
+        if (cartManager) {
+            cartManager.addToCart(productId, quantity);
+        }
     });
     
-    // Category selection is now handled automatically by CategoryComponent
-    // through the 'loadCategoryProducts' and 'loadAllProducts' events
+    // Listen for when user wants to view their cart
+    // This happens when they click the cart icon
+    window.addEventListener('showCart', () => {
+        console.log('Show cart requested');
+        // The cart display is handled by CartViewComponent
+    });
+    
+    // Listen for when user wants to start checkout process
+    // This happens when they click "Checkout" in the cart
+    window.addEventListener('startCheckout', () => {
+        console.log('Start checkout requested');
+        // The checkout process is handled by CheckoutComponent
+    });
+    
+    // Note: Category filtering and search are handled automatically
+    // by other components - no manual setup needed here
 };
 
-// Initialize the app when DOM is loaded
+// Start the application immediately when this file loads
+// This is the entry point that kicks everything off
 initializeApp();

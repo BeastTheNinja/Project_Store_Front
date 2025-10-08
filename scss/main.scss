@@ -1,33 +1,47 @@
 // ========================================
-// MAIN SCSS FILE - IMPORT ORDER MATTERS
+// MAIN SCSS FILE - THE MASTER STYLESHEET
+// This file imports all other SCSS files in the correct order
+// Think of it like a table of contents for all our styles
 // ========================================
 
-// 1. Abstracts (variables, functions, mixins)
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
+// STEP 1: Import foundation files (variables, mixins, functions)
+// These define colors, spacing, breakpoints, and reusable code snippets
+// Must be imported FIRST so other files can use them
+@import 'abstracts/variables';  // Colors, fonts, spacing values
+@import 'abstracts/functions';  // Custom SCSS functions (advanced)
+@import 'abstracts/mixins';     // Reusable style patterns
 
-// 2. Vendors (third-party CSS)
+// STEP 2: Import third-party CSS libraries
+// Any external CSS frameworks or libraries go here
 @import 'vendors/vendors';
 
-// 3. Base styles (resets, typography, base elements)
-@import 'base/reset';
-@import 'base/base';
-@import 'base/typography';
+// STEP 3: Import base/foundation styles
+// These apply to the entire website and reset browser defaults
+@import 'base/reset';      // Remove browser default styles
+@import 'base/base';       // Basic HTML element styles
+@import 'base/typography'; // Font styles, headings, text
 
-// 4. Layout (grid, header, footer, navigation)
-@import 'layout/grid';
-@import 'layout/header';
-@import 'layout/navigation';
-@import 'layout/footer';
+// STEP 4: Import layout styles
+// These define the overall page structure and layout
+@import 'layout/grid';       // Grid system for layouts
+@import 'layout/header';     // Header/top navigation area
+@import 'layout/navigation'; // Navigation menus
+@import 'layout/footer';     // Footer area
 
-// 5. Components (buttons, cards, forms, etc.)
-@import 'components/buttons';
-@import 'components/cards';
-@import 'components/forms';
+// STEP 5: Import component styles
+// These style specific UI components and widgets
+@import 'components/buttons';        // Button styles
+@import 'components/cards';          // Product card styles
+@import 'components/forms';          // Form input styles
+@import 'components/product-detail'; // Product detail modal
+@import 'components/cart-view';      // Shopping cart modal
+@import 'components/checkout';       // Checkout process
+@import 'components/thank-you';      // Order confirmation page
 
-// 6. Pages (page-specific styles)
+// STEP 6: Import page-specific styles
+// Styles that only apply to specific pages
 @import 'pages/pages';
 
-// 7. Themes (theme variations)
+// STEP 7: Import theme variations
+// Different color schemes or visual themes
 @import 'themes/theme';

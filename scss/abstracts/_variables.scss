@@ -1,70 +1,78 @@
 // ========================================
-// COLOR PALETTE
+// DESIGN SYSTEM VARIABLES
+// This file defines all the colors, fonts, spacing, and other design values
+// Using variables makes it easy to change the entire website's look
 // ========================================
 
-// Primary colors
-$primary-color: #2563eb;      // Blue
-$primary-dark: #1d4ed8;       // Darker blue
-$primary-light: #3b82f6;      // Lighter blue
-
-// Secondary colors
-$secondary-color: #10b981;    // Green
-$accent-color: #f59e0b;       // Orange/Amber
-
-// Neutral colors
-$white: #ffffff;
-$gray-50: #f9fafb;
-$gray-100: #f3f4f6;
-$gray-200: #e5e7eb;
-$gray-300: #d1d5db;
-$gray-400: #9ca3af;
-$gray-500: #6b7280;
-$gray-600: #4b5563;
-$gray-700: #374151;
-$gray-800: #1f2937;
-$gray-900: #111827;
-$black: #000000;
-
-// Status colors
-$success-color: #10b981;
-$warning-color: #f59e0b;
-$error-color: #ef4444;
-$info-color: #3b82f6;
-
 // ========================================
-// TYPOGRAPHY
+// COLOR PALETTE - The website's color scheme
 // ========================================
 
-$font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-$font-family-secondary: 'Poppins', sans-serif;
+// Main brand colors (used for buttons, links, highlights)
+$primary-color: #2563eb;      // Main blue - used for buttons and links
+$primary-dark: #1d4ed8;       // Darker blue - used for hover effects
+$primary-light: #3b82f6;      // Lighter blue - used for backgrounds
 
-// Font sizes
-$font-size-xs: 0.75rem;    // 12px
-$font-size-sm: 0.875rem;   // 14px
-$font-size-base: 1rem;     // 16px
-$font-size-lg: 1.125rem;   // 18px
-$font-size-xl: 1.25rem;    // 20px
-$font-size-2xl: 1.5rem;    // 24px
-$font-size-3xl: 1.875rem;  // 30px
-$font-size-4xl: 2.25rem;   // 36px
+// Secondary colors (used for accents and special elements)
+$secondary-color: #10b981;    // Green - used for success messages
+$accent-color: #f59e0b;       // Orange/Amber - used for highlights
 
-// Font weights
-$font-weight-light: 300;
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
+// Neutral colors (used for text, backgrounds, borders)
+// These create the foundation of the design
+$white: #ffffff;              // Pure white - main backgrounds
+$gray-50: #f9fafb;           // Very light gray - subtle backgrounds
+$gray-100: #f3f4f6;          // Light gray - card backgrounds
+$gray-200: #e5e7eb;          // Medium light gray - borders
+$gray-300: #d1d5db;          // Medium gray - dividers
+$gray-400: #9ca3af;          // Medium gray - disabled text
+$gray-500: #6b7280;          // Medium dark gray - secondary text
+$gray-600: #4b5563;          // Dark gray - main text
+$gray-700: #374151;          // Darker gray - headings
+$gray-800: #1f2937;          // Very dark gray - strong headings
+$gray-900: #111827;          // Almost black - emphasis text
+$black: #000000;             // Pure black - rarely used
+
+// Status colors (used for messages and notifications)
+$success-color: #10b981;     // Green - success messages, confirmations
+$warning-color: #f59e0b;     // Yellow/Orange - warning messages
+$error-color: #ef4444;       // Red - error messages, validation
+$info-color: #3b82f6;        // Blue - information messages
 
 // ========================================
-// SPACING
+// TYPOGRAPHY - Font families and text styling
 // ========================================
 
-$spacing-xs: 0.25rem;    // 4px
-$spacing-sm: 0.5rem;     // 8px
-$spacing-md: 0.75rem;    // 12px
-$spacing-lg: 1rem;       // 16px
-$spacing-xl: 1.5rem;     // 24px
-$spacing-2xl: 2rem;      // 32px
+// Font families (what fonts to use for different text)
+$font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  // Main text font
+$font-family-secondary: 'Poppins', sans-serif;  // Heading font (more decorative)
+
+$font-size-xs: 0.75rem;    // 12px - Very small text (captions, fine print)
+$font-size-sm: 0.875rem;   // 14px - Small text (labels, secondary info)
+$font-size-base: 1rem;     // 16px - Normal text (body text, paragraphs)
+$font-size-lg: 1.125rem;   // 18px - Large text (important info)
+$font-size-xl: 1.25rem;    // 20px - Extra large text (subheadings)
+$font-size-2xl: 1.5rem;    // 24px - Large headings
+$font-size-3xl: 1.875rem;  // 30px - Page titles
+$font-size-4xl: 2.25rem;   // 36px - Hero titles
+
+// Font weights (how bold or light the text appears)
+$font-weight-light: 300;    // Thin text
+$font-weight-normal: 400;   // Regular text weight
+$font-weight-medium: 500;   // Slightly bold
+$font-weight-semibold: 600; // Medium bold (good for emphasis)
+$font-weight-bold: 700;     // Bold text (headings, important info)
+
+// ========================================
+// SPACING - Consistent gaps and padding throughout the site
+// These values are used for margins, padding, and gaps between elements
+// ========================================
+
+$spacing-xs: 0.25rem;    // 4px - Tiny gaps
+$spacing-sm: 0.5rem;     // 8px - Small gaps  
+$spacing-md: 0.75rem;    // 12px - Medium gaps
+$spacing-lg: 1rem;       // 16px - Standard gaps
+$spacing-xl: 1.5rem;     // 24px - Large gaps
+$spacing-2xl: 2rem;      // 32px - Extra large gaps
 $spacing-3xl: 3rem;      // 48px
 $spacing-4xl: 4rem;      // 64px
 

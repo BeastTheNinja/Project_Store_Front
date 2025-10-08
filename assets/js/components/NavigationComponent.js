@@ -51,6 +51,9 @@ const createNavigation = () => {
   
   // Setup navigation event listeners
   setupNavigationEvents();
+  
+  // Setup cart-related event listeners
+  setupCartEvents();
 };
 
 // Setup navigation event listeners
@@ -90,6 +93,15 @@ const setupNavigationEvents = () => {
       if (e.key === 'Enter') {
         navSearchButton.click();
       }
+    });
+  }
+
+  // Cart button click
+  const cartButton = document.getElementById('cart-button');
+  if (cartButton) {
+    cartButton.addEventListener('click', () => {
+      // Dispatch event to show cart view
+      window.dispatchEvent(new CustomEvent('viewCart'));
     });
   }
 };
@@ -163,11 +175,61 @@ const populateNavigationDropdown = (categories) => {
   }
 };
 
+// Update cart count in navigation
+const updateCartCount = (count) => {
+  const cartCount = document.getElementById('cart-count');
+  if (cartCount) {
+    cartCount.textContent = count;
+    if (count > 0) {
+      cartCount.classList.remove('hidden');
+    } else {
+      cartCount.classList.add('hidden');
+    }
+  }
+};
+
+// Setup cart-related event listeners
+const setupCartEvents = () => {
+  // Listen for cart updates
+  window.addEventListener('cartUpdated', (event) => {
+    const { totalItems } = event.detail;
+    updateCartCount(totalItems);
+  });
+
+  // Listen for product added to cart
+  window.addEventListener('productAddedToCart', (event) => {
+    const { cartTotal } = event.detail;
+    updateCartCount(cartTotal);
+    
+    // Add visual feedback
+    const cartButton = document.getElementById('cart-button');
+    if (cartButton) {
+      cartButton.classList.add('cart-updated');
+      setTimeout(() => {
+        cartButton.classList.remove('cart-updated');
+      }, 600);
+    }
+  });
+
+  // Listen for product removed from cart
+  window.addEventListener('productRemovedFromCart', (event) => {
+    const { cartTotal } = event.detail;
+    updateCartCount(cartTotal);
+  });
+
+  // Listen for cart cleared
+  window.addEventListener('cartCleared', () => {
+    updateCartCount(0);
+  });
+};
+
 export {
   createNavigation,
   setupNavigationEvents,
   toggleDropdown,
   openDropdown,
   closeDropdown,
-  populateNavigationDropdown
+  populateNavigationDropdown,
+  updateCartCount,
+  setupCartEvents
 };
