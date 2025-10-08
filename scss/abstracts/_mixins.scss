@@ -87,6 +87,14 @@
   color: $gray-800;
 }
 
+@mixin heading-sm {
+  font-family: $font-family-secondary;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: 1.4;
+  color: $gray-800;
+}
+
 @mixin body-text {
   font-family: $font-family-primary;
   font-size: $font-size-base;
