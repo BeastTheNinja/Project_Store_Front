@@ -25,6 +25,14 @@ let cartManager;
 // APPLICATION STARTUP
 // ========================================
 
+// Register the service worker for offline capabilities and better performance
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then((reg) => console.log("service worker registered", reg))
+    .catch((err) => console.error("service worker not registered", err));
+}
+
 // Main function that starts our entire application
 // This runs when the page loads
 const initializeApp = () => {
